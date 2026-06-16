@@ -270,7 +270,19 @@ export class PlayerControlsComponent implements AfterViewInit, OnDestroy {
     this.player.destroy();
     this.player = new Player();
 
-    this.guessTech(this.streamingUrl);
+    try {
+      this.guessTech(this.streamingUrl);
+    } catch (err) {
+      this.logger.e(err);
+      this.notificationService.show(
+        'Player Error',
+        'Unsupported stream URL. Please provide a .mpd (MPEG-DASH) or .m3u8 (HLS) URL.'
+      );
+      this.stateControllerService.transition('settings', 'visible');
+      this.stateControllerService.transition('loader', 'collapsed');
+      return;
+    }
+
     this.attachPlayerEventHandlers();
 
     let licenseUrlHeaders: Record<string, string> | null = null;
@@ -433,14 +445,17 @@ export class PlayerControlsComponent implements AfterViewInit, OnDestroy {
       this.stateControllerService.transition('loader', 'visible');
     });
 
-    this.player.addEventHandler('error', (e: { message: string }) => {
+    this.player.addEventHandler('error', (e: { message?: string }) => {
       this.logger.e(e);
-      this.notificationService.show('Player error', e.message);
+      this.notificationService.show(
+        'Player error',
+        e.message || 'An unknown playback error occurred.'
+      );
     });
 
-    this.player.addEventHandler('hlsError', (e: { details: string }) => {
+    this.player.addEventHandler('hlsError', (e: { details?: string }) => {
       this.logger.e(e.details);
-      this.notificationService.show('Player error', e.details);
+      this.notificationService.show('Player error', e.details || 'A streaming error occurred.');
     });
 
     this.player.addEventHandler('streamInitialized', () => {

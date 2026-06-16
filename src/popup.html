@@ -1,13 +1,28 @@
 <style>
+  :root {
+    color-scheme: dark light;
+    --bg: #1d1d1d;
+    --text: #ffffff;
+    --accent: #c54310;
+    --btn-hover-bg: #ffffff;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f2f2f2;
+      --text: #1a1a1a;
+    }
+  }
+
   body {
-    background-color: #1d1d1d;
+    background-color: var(--bg);
   }
 
   a {
-    background-color: #1d1d1d;
+    background-color: var(--bg);
     border: none;
     border-radius: 2px;
-    color: white;
+    color: var(--text);
     position: relative;
     height: 36px;
     margin: 0;
@@ -34,8 +49,8 @@
   }
 
   a:hover {
-    background-color: rgb(255, 255, 255);
-    color: #c54310;
+    background-color: var(--btn-hover-bg);
+    color: var(--accent);
   }
 </style>
 <a href="#" id="btnApp">Open Extension</a>

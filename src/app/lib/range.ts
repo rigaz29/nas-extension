@@ -39,7 +39,7 @@ export class Range {
     this.type = type;
 
     this.path = document.createElement('div');
-    this.path.style.border = '1px solid white';
+    this.path.style.border = '1px solid var(--text)';
     this.path.style.cursor = 'pointer';
     this.fill = document.createElement('div');
 
@@ -50,17 +50,17 @@ export class Range {
       this.fill.style.width = '0';
       // this.fill.style.float = 'left';
       // this.fill.style.borderRadius = '0 100%';
-      this.fill.style.backgroundColor = '#c54310';
+      this.fill.style.backgroundColor = 'var(--accent)';
     }
 
     if (this.type == 'vertical') {
       this.path.style.width = '4px';
       this.path.style.height = '100%';
-      this.path.style.backgroundColor = 'white';
+      this.path.style.backgroundColor = 'var(--border)';
       this.fill.style.width = '2px';
       this.fill.style.height = '100%';
       // this.fill.style.borderRadius = '100% 100% 0 0';
-      this.fill.style.backgroundColor = 'black';
+      this.fill.style.backgroundColor = 'var(--accent)';
     }
 
     this.path.appendChild(this.fill);

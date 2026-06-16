@@ -4,11 +4,45 @@
     <meta charset="UTF-8" />
     <title>Native HLS Settings</title>
     <style>
+      :root {
+        color-scheme: dark light;
+        --bg: #1d1d1d;
+        --text: #ffffff;
+        --accent: #c54310;
+        --input-bg: #ffffff;
+        --input-text: #000000;
+        --border: #929292;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #fafafa;
+          --text: #1a1a1a;
+          --border: #c4c4c4;
+        }
+      }
+
       body {
         padding: 10px;
-        background-color: #1d1d1d;
-        color: white;
+        background-color: var(--bg);
+        color: var(--text);
         width: 1000px;
+      }
+
+      textarea {
+        color: var(--input-text);
+        background-color: var(--input-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+      }
+
+      button {
+        color: #ffffff;
+        background-color: var(--accent);
+        border: none;
+        border-radius: 4px;
+        padding: 6px 14px;
+        cursor: pointer;
       }
     </style>
   </head>
